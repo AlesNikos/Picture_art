@@ -27,7 +27,9 @@ function calc() {
 	
 
 	function promo() {
-		if (promocode.value == "IWANTPOPART") {
+		if (promocode.value != "IWANTPOPART") {
+			calcPrice.innerHTML = total;
+		} else {
 			calcPrice.innerHTML = calcPrice.innerHTML * 0.7;
 		}
 	}
