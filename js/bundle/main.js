@@ -6,17 +6,19 @@ window.addEventListener('DOMContentLoaded', function() {
 		mainSlider = require('../parts/mainSlider.js'),
 		calc = require('../parts/calc.js'),
 		feedbackSlider = require('../parts/feedbackSlider.js'),
-		ajax = require('../parts/ajax.js');
+		ajax = require('../parts/ajax.js'),
+		moreStyles = require('../parts/moreStyles.js');
 
 
 
 	modalGift();	//сделал и исправил замечания
 	modalConsultation(); //сделал и исправил замечания
 	modalDesign(); //сделал и исправил замечания
-	mainSlider(); //не работает анимация
-	calc(); //осталось доделать промокод
+	mainSlider(); //сделал
+	calc(); //сделал
 	feedbackSlider(); //не работает анимация
 	ajax();
+	moreStyles(); //сделал
 
 
 
