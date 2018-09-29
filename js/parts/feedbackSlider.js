@@ -1,45 +1,53 @@
 function feedbackSlider() {
 
-	let slideIndex = 1,
+	let slideIndex = 0,
 		slides = document.getElementsByClassName('feedback-slider-item'),
+		boxSlider = document.querySelector('.feedback-slider-box'),
 		prev = document.querySelector('.main-prev-btn'),
 		next = document.querySelector('.main-next-btn');
 
 	showSlides(slideIndex);
-	autoSlider();
+	
 	
 	function autoSlider() {
-		let timeInterval = setInterval(showSlides, 5000)
+		plusSlides(1);
 	}
+
+	let timeInterval = setInterval(autoSlider, 5000);
 
 	function showSlides(n) {
 
-		if (n > slides.length) {
-			slideIndex = 1;
+		if (n > slides.length - 1) {
+			slideIndex = 0;
 		}
-		if (n < 1) {
-			slideIndex = slides.length;
-		}
-
-		for (let i = 0; i < slides.length; i++) {
-			slides[i].style.display = 'none';
+		if (n < 0) {
+			slideIndex = slides.length - 1;
 		}
 
-		slides[slideIndex - 1].style.display = 'block';
+		// for (let i = 0; i < slides.length; i++) {
+		// 	slides[i].style.display = 'none';
+		// }
+
+		// slides[slideIndex - 1].style.display = 'block';
+
+		let boxWidth = boxSlider.clientWidth,
+			offset = -slideIndex*boxWidth;
+
+		boxSlider.setAttribute('style', `transform: translate(${offset}px)`);
 	}
 
 	
-	function plusSliders(n) {
+	function plusSlides(n) {
 		showSlides(slideIndex += n);
 	}
 
 
 	prev.addEventListener('click', function() {
-		plusSliders(-1);
+		plusSlides(-1);
 	});
 
 	next.addEventListener('click', function() {
-		plusSliders(1);
+		plusSlides(1);
 	});
 
 	

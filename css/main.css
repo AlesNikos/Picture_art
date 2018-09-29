@@ -847,7 +847,7 @@ h4 {
   position: absolute;
   bottom: -3rem;
   left: 15rem;
-  z-index: 1000000;
+  z-index: 1100000;
 }
 .feedback-block .button-order:before {
   content: '';
@@ -1723,4 +1723,17 @@ h4 {
     padding: 3rem 3rem;
     width: 25rem;
   }
+}
+.feedback-slider {
+  overflow: hidden;
+}
+.feedback-slider-box {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  transition: .5s transform;
+}
+.feedback-slider-item {
+  flex: 0 0 100%;
+  display: inline-block;
 }
