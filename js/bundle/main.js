@@ -7,7 +7,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		calc = require('../parts/calc.js'),
 		feedbackSlider = require('../parts/feedbackSlider.js'),
 		ajax = require('../parts/ajax.js'),
-		moreStyles = require('../parts/moreStyles.js');
+		moreStyles = require('../parts/moreStyles.js'),
+		sortPortfolio = require('../parts/sortPortfolio.js');
 
 
 
@@ -19,6 +20,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	feedbackSlider(); //не работает анимация
 	ajax();
 	moreStyles(); //сделал
+	sortPortfolio();
 
 
 

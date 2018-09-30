@@ -8,7 +8,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		calc = require('../parts/calc.js'),
 		feedbackSlider = require('../parts/feedbackSlider.js'),
 		ajax = require('../parts/ajax.js'),
-		moreStyles = require('../parts/moreStyles.js');
+		moreStyles = require('../parts/moreStyles.js'),
+		sortPortfolio = require('../parts/sortPortfolio.js');
 
 
 
@@ -20,6 +21,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	feedbackSlider(); //не работает анимация
 	ajax();
 	moreStyles(); //сделал
+	sortPortfolio();
 
 
 
@@ -27,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 });
-},{"../parts/ajax.js":2,"../parts/calc.js":3,"../parts/feedbackSlider.js":4,"../parts/mainSlider.js":5,"../parts/modalConsultation.js":6,"../parts/modalDesign.js":7,"../parts/modalGift.js":8,"../parts/moreStyles.js":9}],2:[function(require,module,exports){
+},{"../parts/ajax.js":2,"../parts/calc.js":3,"../parts/feedbackSlider.js":4,"../parts/mainSlider.js":5,"../parts/modalConsultation.js":6,"../parts/modalDesign.js":7,"../parts/modalGift.js":8,"../parts/moreStyles.js":9,"../parts/sortPortfolio.js":10}],2:[function(require,module,exports){
 function ajax () {
 
 	let message = new Object();
@@ -209,8 +211,6 @@ function modalConsultation() {
 
 	//Модальное окно при нажатии на кнопки "Подробнее об услуге"
 
-
-
 	let popupConsultation = document.querySelector('.popup-consultation'),
 		close = document.getElementsByClassName('popup-close');
 
@@ -219,8 +219,7 @@ function modalConsultation() {
 			popupConsultation.style.display = 'none';
 		} else {
 			popupConsultation.style.display = 'block';
-		}
-		
+		}		
 	}, 60000)
 
 	document.body.addEventListener('click', event => {
@@ -345,4 +344,49 @@ function moreStyles() {
 }
 
 module.exports = moreStyles;
+},{}],10:[function(require,module,exports){
+function sortPortfolio() {
+
+	let portfolioMenu = document.querySelector('.portfolio-menu'),
+		linkItem = portfolioMenu.getElementsByTagName('li'),
+		portfolioNo = document.querySelector('.portfolio-no'),
+		portfolioBlock = document.getElementsByClassName('portfolio-block');
+
+	portfolioMenu.addEventListener('click', function(event) {
+		let target = event.target.className;
+		console.log(target);
+
+		for (let i = 0; i < linkItem.length; i++) {
+
+			if (linkItem[i].classList.contains(target)) {
+				linkItem[i].classList.add('active');
+
+			  	for (let j=0; j<portfolioBlock.length; j++) {
+
+				  	if (portfolioBlock[j].classList.contains(target)) {
+				    	portfolioBlock[j].style.display = 'block';
+
+				    } else if (target == 'grandmother' || target == 'granddad') {
+						portfolioNo.style.display = 'block';
+						portfolioBlock[j].style.display = 'none';
+
+					}	else {
+				    	portfolioBlock[j].style.display = 'none';
+				    	portfolioNo.style.display = 'none';
+				    }
+				}
+
+			} else {
+				if (target.match(/\bactive\b/)) {
+					break;
+				} else {
+					linkItem[i].classList.remove('active');
+				}
+					
+			}
+		}
+	});
+}
+
+module.exports = sortPortfolio;
 },{}]},{},[1]);
