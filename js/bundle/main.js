@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	feedbackSlider(); //не работает анимация
 	ajax();
 	moreStyles(); //сделал
-	sortPortfolio();
+	sortPortfolio(); //сделал
 
 
 
