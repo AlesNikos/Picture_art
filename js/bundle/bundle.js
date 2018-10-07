@@ -9,7 +9,9 @@ window.addEventListener('DOMContentLoaded', function() {
 		feedbackSlider = require('../parts/feedbackSlider.js'),
 		ajax = require('../parts/ajax.js'),
 		moreStyles = require('../parts/moreStyles.js'),
-		sortPortfolio = require('../parts/sortPortfolio.js');
+		sortPortfolio = require('../parts/sortPortfolio.js'),
+		picHover = require('../parts/picHover.js'),
+		accordion = require('../parts/accordion.js');
 
 
 
@@ -22,6 +24,8 @@ window.addEventListener('DOMContentLoaded', function() {
 	ajax();
 	moreStyles(); //сделал
 	sortPortfolio(); //сделал
+	picHover(); //не работает на мобильных утсройствах
+	accordion();
 
 
 
@@ -29,7 +33,48 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 });
-},{"../parts/ajax.js":2,"../parts/calc.js":3,"../parts/feedbackSlider.js":4,"../parts/mainSlider.js":5,"../parts/modalConsultation.js":6,"../parts/modalDesign.js":7,"../parts/modalGift.js":8,"../parts/moreStyles.js":9,"../parts/sortPortfolio.js":10}],2:[function(require,module,exports){
+},{"../parts/accordion.js":2,"../parts/ajax.js":3,"../parts/calc.js":4,"../parts/feedbackSlider.js":5,"../parts/mainSlider.js":6,"../parts/modalConsultation.js":7,"../parts/modalDesign.js":8,"../parts/modalGift.js":9,"../parts/moreStyles.js":10,"../parts/picHover.js":11,"../parts/sortPortfolio.js":12}],2:[function(require,module,exports){
+function accordion() {
+
+	let accordion = document.getElementById('accordion'),
+		accordionHead = document.querySelectorAll('.accordion-heading'),
+		accordHeadSpan = document.querySelectorAll('.accordion-heading > span'),
+		accordionBlock = document.querySelectorAll('.accordion-block');
+
+
+	accordion.addEventListener('click', function (e) {
+		let target = e.target;
+
+		if (target.tagName == 'SPAN') {
+			for (let i = 0; i < accordionHead.length; i++) {
+				hideAccord(i);
+
+				if (target == accordHeadSpan[i]) {
+					showAccord(i);
+					// break;
+				}
+			}
+		}
+	});
+
+	function showAccord(a) {
+		accordionBlock[a].style.display = 'block';
+		accordionBlock[a].classList.add('ui-accordion-content-active');
+		accordionHead[a].classList.add('ui-accordion-header-active');
+		
+	}
+
+	function hideAccord(b) {
+		for (let i = b; i < accordionBlock.length; i++) {
+			accordionBlock[i].style.display = 'none';
+			accordionBlock[i].classList.remove('ui-accordion-content-active');
+			accordionHead[i].classList.remove('ui-accordion-header-active');
+		}
+	}
+}
+
+module.exports = accordion;
+},{}],3:[function(require,module,exports){
 function ajax () {
 
 	let message = new Object();
@@ -76,7 +121,7 @@ function ajax () {
 }
 
 module.exports = ajax;
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 function calc() {
 
 	let size = document.getElementById('size'),
@@ -115,7 +160,7 @@ function calc() {
 }
 
 module.exports = calc;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 function feedbackSlider() {
 
 	let slideIndex = 0,
@@ -172,7 +217,7 @@ function feedbackSlider() {
 }
 
 module.exports = feedbackSlider;
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 function mainSlider() {
 
 	let slideIndex = -1,
@@ -206,7 +251,7 @@ function mainSlider() {
 }
 
 module.exports = mainSlider;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 function modalConsultation() {
 
 	//Модальное окно при нажатии на кнопки "Подробнее об услуге"
@@ -252,7 +297,7 @@ function modalConsultation() {
 }
 
 module.exports = modalConsultation;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 function modalDesign() {
 
 	//Модальное окно при нажатии на кнопки "Заказать", "Заказать портрет", "Заказать дизайн проекта", "Хочу так же"
@@ -291,7 +336,7 @@ function modalDesign() {
 }
 
 module.exports = modalDesign;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 function modalGift() {
 
 	// Модальное окно при нажатии на подарок
@@ -326,7 +371,7 @@ function modalGift() {
 }
 
 module.exports = modalGift;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 function moreStyles() {
 
 	let stylesBtn = document.querySelector('.button-styles'),
@@ -344,7 +389,113 @@ function moreStyles() {
 }
 
 module.exports = moreStyles;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
+function picHover() {
+
+	//Показ картинок при наведении мышью и при нажатии на мобильных утройствах
+
+	let sizeWrapper = document.querySelector('.sizes-wrapper'),
+		img = sizeWrapper.getElementsByTagName('img'),
+		imgHover = [
+				"sizes-1-1", 
+				"sizes-2-1",
+				"sizes-3-1",
+				"sizes-4-1"
+			],
+		imgDefault = [
+						"sizes-1",
+						"sizes-2",
+						"sizes-3",
+						"sizes-4"
+			];
+
+	if (isTouchDevice() === true) {	
+
+  sizeWrapper.addEventListener('mouseenter', function(event) {
+      
+  	let target = event.target;
+  	event.preventDefault();
+
+  	// if (target.tagName != 'IMG') return;
+
+  	let childContainer = target.parentNode.querySelector('.sizes-wrapper');
+  	if (target.tagName != 'IMG') return;
+
+  	for (let i = 0; i < img.length; i++) {
+    	if (target == img[i]) {
+		    showPic(i);
+		    break;
+     }
+    }  
+
+
+  	// if (event.target.classList.contains('img-sizes')) {
+	  // 	 for (let i = 0; i < img.length; i++) {
+   //  	if (target == img[i]) {
+		 //    showPic(i);
+		 //    break;
+   //   } 
+
+   //   }
+  	// } else {
+   //   	for (let i = 0; i < img.length; i++) {
+  	// 				hidePic(i);
+  	// 			}
+   //   }
+
+
+      
+  	// if (target.tagName == 'IMG') {
+   //  for (let i = 0; i < img.length; i++) {
+   //  	if (target == img[i]) {
+		 //    showPic(i);
+		 //    break;
+   //   }
+   //  }
+  	// } else {
+  	// 			for (let i = 0; i < img.length; i++) {
+  	// 				hidePic(i);
+  	// 			}
+	  //   // img[i].forEach(function(i) {
+   //   //  hidePic(i);
+	  //   // });
+  	// }
+  }, false);
+
+	} else {
+
+		for (let i = 0; i < img.length; i++) {
+
+			img[i].addEventListener('mouseover', function() {
+				showPic(i);
+			});
+
+			img[i].addEventListener('mouseout', function() {
+				hidePic(i);
+			})
+		}
+	}
+
+	function isTouchDevice() {
+  return true == ("ontouchstart" in window || window.DocumentTouch && document instanceof DocumentTouch);
+	}
+
+	function showPic(i) {
+		img[i].style.position = 'relative';
+		img[i].style.zIndex = '100';
+		img[i].src = `img/${imgHover[i]}.png`;
+	}
+
+	function hidePic(i) {
+		img[i].style.position = '';
+		img[i].style.zIndex = '';
+		img[i].src = `img/${imgDefault[i]}.png`;
+	}
+}
+
+
+module.exports = picHover;
+},{}],12:[function(require,module,exports){
 function sortPortfolio() {
 
 	let portfolioMenu = document.querySelector('.portfolio-menu'),

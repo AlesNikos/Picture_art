@@ -8,7 +8,9 @@ window.addEventListener('DOMContentLoaded', function() {
 		feedbackSlider = require('../parts/feedbackSlider.js'),
 		ajax = require('../parts/ajax.js'),
 		moreStyles = require('../parts/moreStyles.js'),
-		sortPortfolio = require('../parts/sortPortfolio.js');
+		sortPortfolio = require('../parts/sortPortfolio.js'),
+		picHover = require('../parts/picHover.js'),
+		accordion = require('../parts/accordion.js');
 
 
 
@@ -21,6 +23,8 @@ window.addEventListener('DOMContentLoaded', function() {
 	ajax();
 	moreStyles(); //сделал
 	sortPortfolio(); //сделал
+	picHover(); //не работает на мобильных утсройствах
+	accordion();
 
 
 
