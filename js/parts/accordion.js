@@ -15,7 +15,6 @@ function accordion() {
 
 				if (target == accordHeadSpan[i]) {
 					showAccord(i);
-					// break;
 				}
 			}
 		}
