@@ -43,6 +43,7 @@ function modalGift() {
 		isClicker = true;
 	}
 
+	//Функция открывания модульного окна при пролистывание до конца страницы
 	window.onscroll = function() {
 		// размер скролла
   let scrolled = window.pageYOffset || document.documentElement.scrollTop,
