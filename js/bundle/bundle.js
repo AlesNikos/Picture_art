@@ -388,7 +388,7 @@ function modalGift() {
 			popupGift.style.display = "block";
 			fixedGift.style.display = "none";
 		}
-	}	
+	};	
 }
 
 module.exports = modalGift;
