@@ -1010,7 +1010,7 @@ h4 {
   margin-top: 1rem;
 }
 .popup-consultation {
-  z-index: 20;
+  z-index: 1000000;
   position: fixed;
   display: none;
   top: 0;
