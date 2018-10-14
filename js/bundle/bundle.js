@@ -11,7 +11,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		moreStyles = require('../parts/moreStyles.js'),
 		sortPortfolio = require('../parts/sortPortfolio.js'),
 		picHover = require('../parts/picHover.js'),
-		accordion = require('../parts/accordion.js');
+		accordion = require('../parts/accordion.js'),
+		gamburger = require('../parts/gamburger.js');
 
 
 
@@ -20,12 +21,13 @@ window.addEventListener('DOMContentLoaded', function() {
 	modalDesign(); //сделал и исправил замечания
 	mainSlider(); //сделал
 	calc(); //сделал
-	feedbackSlider(); //не работает анимация
+	feedbackSlider(); //сделал
 	ajax();
 	moreStyles(); //сделал
 	sortPortfolio(); //сделал
 	picHover(); //не работает на мобильных утсройствах
-	accordion();
+	accordion(); //сделал
+	gamburger();
 
 
 
@@ -33,7 +35,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 });
-},{"../parts/accordion.js":2,"../parts/ajax.js":3,"../parts/calc.js":4,"../parts/feedbackSlider.js":5,"../parts/mainSlider.js":6,"../parts/modalConsultation.js":7,"../parts/modalDesign.js":8,"../parts/modalGift.js":9,"../parts/moreStyles.js":10,"../parts/picHover.js":11,"../parts/sortPortfolio.js":12}],2:[function(require,module,exports){
+},{"../parts/accordion.js":2,"../parts/ajax.js":3,"../parts/calc.js":4,"../parts/feedbackSlider.js":5,"../parts/gamburger.js":6,"../parts/mainSlider.js":7,"../parts/modalConsultation.js":8,"../parts/modalDesign.js":9,"../parts/modalGift.js":10,"../parts/moreStyles.js":11,"../parts/picHover.js":12,"../parts/sortPortfolio.js":13}],2:[function(require,module,exports){
 function accordion() {
 
 	let accordion = document.getElementById('accordion'),
@@ -81,10 +83,19 @@ function ajax () {
 	message.success = "Успешно"; //сюда сделать оповещение
 	message.failure = "Что-то пошло не так";
 
-	let form = document.getElementsByClassName('form')[0],
+	let form = document.getElementsByTagName('form')[0],
+		mainForm = document.getElementsByClassName('main-form'),
 		input = document.getElementsByTagName('input'),
+		textarea = document.getElementsByTagName('textarea'),
 		statusMessage = document.createElement('div');
 		statusMessage.classList.add('status');
+
+	document.body.addEventListener('click', event => {
+		let target = event.target;
+		if (!event.target.classList.contains('main-form')) return;
+		
+		sendForm(mainForm);
+	});
 
 	function sendForm(elem) {
 		elem.addEventListener('submit', function(e) {
@@ -116,7 +127,7 @@ function ajax () {
 			}
 		});
 	}
-	sendForm(form);
+	// sendForm(form);
 }
 
 module.exports = ajax;
@@ -211,6 +222,33 @@ function feedbackSlider() {
 
 module.exports = feedbackSlider;
 },{}],6:[function(require,module,exports){
+function gamburger () {
+
+	let menuBtn = document.querySelector('.burger'),
+		burgerMenu = document.querySelector('.burger-menu');
+
+
+		window.addEventListener('resize', function() {
+			let width = window.innerWidth;
+
+			if (width <= 768) {
+				menuBtn.addEventListener('click', function() {
+					burgerMenu.style.display = 'block';
+				});
+			} //else {
+			// 	burgerMenu.style.display = 'none';
+			// }
+
+			if (width > 768) {
+				burgerMenu.style.display = 'none';
+			}
+		});
+
+
+}
+
+module.exports = gamburger;
+},{}],7:[function(require,module,exports){
 function mainSlider() {
 
 	let slideIndex = -1,
@@ -244,7 +282,7 @@ function mainSlider() {
 }
 
 module.exports = mainSlider;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 function modalConsultation() {
 
 	//Модальное окно при нажатии на кнопки "Подробнее об услуге"
@@ -290,7 +328,7 @@ function modalConsultation() {
 }
 
 module.exports = modalConsultation;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 function modalDesign() {
 
 	//Модальное окно при нажатии на кнопки "Заказать", "Заказать портрет", "Заказать дизайн проекта", "Хочу так же"
@@ -329,7 +367,7 @@ function modalDesign() {
 }
 
 module.exports = modalDesign;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 function modalGift() {
 
 	// Модальное окно при нажатии на подарок
@@ -392,7 +430,7 @@ function modalGift() {
 }
 
 module.exports = modalGift;
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 function moreStyles() {
 
 	let stylesBtn = document.querySelector('.button-styles'),
@@ -410,7 +448,7 @@ function moreStyles() {
 }
 
 module.exports = moreStyles;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 function picHover() {
 
 	//Показ картинок при наведении мышью и при нажатии на мобильных утройствах
@@ -516,7 +554,7 @@ function picHover() {
 
 
 module.exports = picHover;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 function sortPortfolio() {
 
 	let portfolioMenu = document.querySelector('.portfolio-menu'),

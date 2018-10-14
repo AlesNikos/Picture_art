@@ -10,7 +10,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		moreStyles = require('../parts/moreStyles.js'),
 		sortPortfolio = require('../parts/sortPortfolio.js'),
 		picHover = require('../parts/picHover.js'),
-		accordion = require('../parts/accordion.js');
+		accordion = require('../parts/accordion.js'),
+		gamburger = require('../parts/gamburger.js');
 
 
 
@@ -19,12 +20,13 @@ window.addEventListener('DOMContentLoaded', function() {
 	modalDesign(); //сделал и исправил замечания
 	mainSlider(); //сделал
 	calc(); //сделал
-	feedbackSlider(); //не работает анимация
+	feedbackSlider(); //сделал
 	ajax();
 	moreStyles(); //сделал
 	sortPortfolio(); //сделал
 	picHover(); //не работает на мобильных утсройствах
-	accordion();
+	accordion(); //сделал
+	gamburger();
 
 
 

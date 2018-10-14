@@ -5,10 +5,19 @@ function ajax () {
 	message.success = "Успешно"; //сюда сделать оповещение
 	message.failure = "Что-то пошло не так";
 
-	let form = document.getElementsByClassName('form')[0],
+	let form = document.getElementsByTagName('form')[0],
+		mainForm = document.getElementsByClassName('main-form'),
 		input = document.getElementsByTagName('input'),
+		textarea = document.getElementsByTagName('textarea'),
 		statusMessage = document.createElement('div');
 		statusMessage.classList.add('status');
+
+	document.body.addEventListener('click', event => {
+		let target = event.target;
+		if (!event.target.classList.contains('main-form')) return;
+		
+		sendForm(mainForm);
+	});
 
 	function sendForm(elem) {
 		elem.addEventListener('submit', function(e) {
@@ -40,7 +49,7 @@ function ajax () {
 			}
 		});
 	}
-	sendForm(form);
+	// sendForm(form);
 }
 
 module.exports = ajax;
